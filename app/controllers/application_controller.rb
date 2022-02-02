@@ -6,4 +6,11 @@ class ApplicationController < Sinatra::Base
     { message: "Good luck with your project!" }.to_json
   end
 
+  # get '/best_adult_locations' do
+  #   Location.all.each do |loc|
+  #     average_adult_rating = loc.reviews.average(:adult_rating)
+  #     Location.order(average_adult_rating: :desc).to_json
+  #   end
+  # end
+
 end
