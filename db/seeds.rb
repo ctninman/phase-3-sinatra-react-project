@@ -6,7 +6,7 @@ nyc = City.create(city_name: "New York City", state: "NY", country: "USA")
 sf = City.create(city_name: "San Francisco", state: "CA", country: "USA")
 madtown = City.create(city_name: "Madison", state: "WI", country: "USA")
 
-activity_types = ["Playground", "Nature", "Museum", "Store", "Class" ]
+activity_types = ["Playground", "Nature", "Museum", "Store", "Class", "Art", "Dance", "Music", "Library", "Sport" ]
 
 25.times do
   Location.create(
