@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_01_024612) do
+ActiveRecord::Schema.define(version: 2022_02_03_171418) do
 
   create_table "cities", force: :cascade do |t|
     t.string "city_name"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_024612) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "activity_type"
+    t.boolean "free"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -56,7 +57,6 @@ ActiveRecord::Schema.define(version: 2022_02_01_024612) do
     t.boolean "want_to_visit"
     t.boolean "visited"
     t.integer "time_spent"
-    t.integer "price_per_person"
     t.integer "fun_factor"
     t.integer "educational_value"
     t.datetime "created_at", precision: 6, null: false
@@ -70,6 +70,7 @@ ActiveRecord::Schema.define(version: 2022_02_01_024612) do
     t.string "photo"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "password"
   end
 
 end

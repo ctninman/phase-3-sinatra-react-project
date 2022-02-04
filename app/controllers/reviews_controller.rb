@@ -8,6 +8,18 @@ class ReviewsController < ApplicationController
     serialize_reviews(Review.all)
   end
 
+  get '/locations/:id/reviews' do
+    location = Location.find(params[:id])
+    location_reviews = location.reviews
+    serialize_reviews(location_reviews)
+  end
+
+  get '/users/:id/reviews' do
+    user = User.find(params[:id])
+    user_reviews = user.reviews
+    serialize_reviews(user_reviews)
+  end
+
   get '/reviews/:id' do
     serialize_reviews(Review.find(params[:id]))
   end
@@ -66,3 +78,23 @@ class ReviewsController < ApplicationController
   end
 
 end
+
+# {
+#       "location_id": 1,
+#       "user_id": 1,
+#       "activities": ["mini-golf", "skating"],
+#       "review": "Never going back again",
+#       "baby_rating": 4,
+#       "toddler_rating": 3,
+#       "preschool_rating": 2,
+#       "school_age_rating": 1,
+#       "adult_rating": 1,
+#       "general_rating": 2,
+#       "favorite": false,
+#       "want_to_visit": false,
+#       "visited": true,
+#       "time_spent": 50,
+#       "price_per_person": 22,
+#       "fun_factor": 1,
+#       "educational_value": 1
+# }

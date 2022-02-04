@@ -8,13 +8,14 @@ madtown = City.create(city_name: "Madison", state: "WI", country: "USA")
 
 activity_types = ["Playground", "Nature", "Museum", "Store", "Class" ]
 
-10.times do
+25.times do
   Location.create(
     location_name: Faker::Restaurant.name,
     city_id: City.all.sample.id,
     activity_type: activity_types.sample,
     outdoor: Faker::Boolean.boolean,
     indoor: Faker::Boolean.boolean,
+    free: Faker::Boolean.boolean,
     description: Faker::Lorem.paragraph(sentence_count: 2),
     photo: Faker::LoremFlickr.image,
     address: Faker::Address.street_address,
@@ -23,16 +24,17 @@ activity_types = ["Playground", "Nature", "Museum", "Store", "Class" ]
   )
 end
 
-20.times do
+50.times do
   User.create(
     user_name: Faker::Name.name,
+    password: Faker::Internet.password(max_length: 10),
     city_id: City.all.sample.id,
     number_of_kids: rand(1..4),
     photo: Faker::LoremFlickr.image
   )
 end
 
-40.times do
+100.times do
   Kid.create(
     user_id: User.all.sample.id,
     first_initial: Faker::Name.initials(number: 1),
@@ -40,7 +42,7 @@ end
   )
 end
 
-50.times do
+150.times do
   Review.create(
     location_id: Location.all.sample.id,
     user_id: User.all.sample.id,
@@ -56,7 +58,6 @@ end
     want_to_visit: Faker::Boolean.boolean,
     visited: Faker::Boolean.boolean,
     time_spent: rand(1..120),
-    price_per_person: rand(0..15),
     fun_factor: rand(1..5),
     educational_value: rand(1..5)
   )

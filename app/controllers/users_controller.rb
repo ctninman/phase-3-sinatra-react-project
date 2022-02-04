@@ -12,6 +12,18 @@ class UsersController < ApplicationController
     serialize_users(User.find(params[:id]))
   end
 
+  get '/cities/:id/users' do
+    city = City.find(params[:id])
+    city_users = city.users
+    serialize_users(city_users)
+  end
+
+  get '/locations/:id/users' do
+    location = Location.find(params[:id])
+    location_users = location.users
+    serialize_users(location_users)
+  end
+
   delete '/users/:id' do
     user = User.find(params[:id])
     user.destroy
