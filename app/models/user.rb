@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
   has_many :kids
   has_many :reviews
   has_many :locations, through: :reviews
+  has_many :favorites
 end

@@ -42,12 +42,6 @@ class ReviewsController < ApplicationController
       school_age_rating: params[:school_age_rating],
       adult_rating: params[:adult_rating],
       general_rating: params[:general_rating],
-      favorite: params[:favorite],
-      want_to_visit: params[:want_to_visit],
-      visited: params[:visited],
-      time_spent: params[:time_spent],
-      price_per_person: params[:price_per_person],
-      fun_factor: params[:fun_factor],
       educational_value: params[:educational_value]
     )
     serialize_reviews(review)
@@ -66,35 +60,9 @@ class ReviewsController < ApplicationController
       school_age_rating: params[:school_age_rating],
       adult_rating: params[:adult_rating],
       general_rating: params[:general_rating],
-      favorite: params[:favorite],
-      want_to_visit: params[:want_to_visit],
-      visited: params[:visited],
-      time_spent: params[:time_spent],
-      price_per_person: params[:price_per_person],
-      fun_factor: params[:fun_factor],
       educational_value: params[:educational_value]
     )
     serialize_reviews(review)
   end
 
 end
-
-# {
-#       "location_id": 1,
-#       "user_id": 1,
-#       "activities": ["mini-golf", "skating"],
-#       "review": "Never going back again",
-#       "baby_rating": 4,
-#       "toddler_rating": 3,
-#       "preschool_rating": 2,
-#       "school_age_rating": 1,
-#       "adult_rating": 1,
-#       "general_rating": 2,
-#       "favorite": false,
-#       "want_to_visit": false,
-#       "visited": true,
-#       "time_spent": 50,
-#       "price_per_person": 22,
-#       "fun_factor": 1,
-#       "educational_value": 1
-# }

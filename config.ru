@@ -18,3 +18,4 @@ use UsersController
 use KidsController
 use LocationsController
 use CitiesController
+use FavoritesController

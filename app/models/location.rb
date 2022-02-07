@@ -1,6 +1,7 @@
 class Location < ActiveRecord::Base
   belongs_to :city
   has_many :reviews
+  has_many :favorites
   has_many :users, through: :reviews
 
   def average_adult_rating
