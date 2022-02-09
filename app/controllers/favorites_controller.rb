@@ -1,7 +1,7 @@
 class FavoritesController < ApplicationController
 
   def serialize_favorites (objects)
-    objects.to_json(include: [:location, user: {include: :favorites}])
+    objects.to_json(include: [:location, user: {include: [:favorites, :reviews, :city, :locations, :kids]}])
   end
 
   post '/favorites' do
@@ -22,13 +22,13 @@ class FavoritesController < ApplicationController
       want_to_visit: params[:want_to_visit],
       visited: params[:visited]    
     )
-    serialize_favorites(favorite)
+    serialize_favorites(Favorite.all)
   end
 
   delete '/favorites/:id' do
     favorite = Favorite.find(params[:id])
     favorite.destroy
-   {message: 'Favorite deleted'}.to_json
+    serialize_favorites(favorite)
   end
 
 end

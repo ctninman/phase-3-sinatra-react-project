@@ -46,7 +46,6 @@ end
   Review.create(
     location_id: Location.all.sample.id,
     user_id: User.all.sample.id,
-    activities: Faker::Hipster.words(number: 4),
     review: Faker::Lorem.paragraph(sentence_count: 2),
     baby_rating: rand(1..5),
     toddler_rating: rand(1..5),
@@ -54,12 +53,17 @@ end
     school_age_rating: rand(1..5),
     adult_rating: rand(1..5),
     general_rating: rand(1..5),
-    favorite: Faker::Boolean.boolean,
-    want_to_visit: Faker::Boolean.boolean,
-    visited: Faker::Boolean.boolean,
-    time_spent: rand(1..120),
-    fun_factor: rand(1..5),
     educational_value: rand(1..5)
+  )
+end
+
+250.times do
+  Favorite.create(
+    location_id: Location.all.sample.id,
+    user_id: User.all.sample.id,
+    favorite: Faker::Boolean.boolean,
+    want_to_visit: true,
+    visited: Faker::Boolean.boolean,
   )
 end
 

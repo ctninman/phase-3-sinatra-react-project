@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   def serialize_reviews(objects)
-    objects.to_json(include: [:user, :location])
+    objects.to_json(include: [:location, user: {include: [:locations, :reviews, favorites: {include: :location}]}])
   end
 
   get '/reviews' do
@@ -27,14 +27,13 @@ class ReviewsController < ApplicationController
   delete '/reviews/:id' do
     review = Review.find(params[:id])
     review.destroy
-    {message: 'Review deleted'}.to_json
+    serialize_reviews(review)
   end
 
   post '/reviews' do
     review = Review.create(
       location_id: params[:location_id],
       user_id: params[:user_id],
-      activities: params[:activities],
       review: params[:review],
       baby_rating: params[:baby_rating],
       toddler_rating: params[:toddler_rating],
@@ -52,7 +51,6 @@ class ReviewsController < ApplicationController
     review.update(
       location_id: params[:location_id],
       user_id: params[:user_id],
-      activities: params[:activities],
       review: params[:review],
       baby_rating: params[:baby_rating],
       toddler_rating: params[:toddler_rating],

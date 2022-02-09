@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def serialize_users(objects)
-    objects.to_json(include: [:kids, :city, :locations, :reviews, favorites: {include: :location}])
+    objects.to_json(include: [:kids, :city, :locations, reviews: {include: :location}, favorites: {include: :location}])
   end
 
   get '/users' do
