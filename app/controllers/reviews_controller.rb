@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   def serialize_reviews(objects)
-    objects.to_json(include: [:location, user: {include: [:locations, :reviews, favorites: {include: :location}]}])
+    objects.to_json(include: [:location, user: {include: [:locations, reviews: {include: :location}, favorites: {include: :location}]}])
   end
 
   get '/reviews' do
@@ -40,8 +40,7 @@ class ReviewsController < ApplicationController
       preschool_rating: params[:preschool_rating],
       school_age_rating: params[:school_age_rating],
       adult_rating: params[:adult_rating],
-      general_rating: params[:general_rating],
-      educational_value: params[:educational_value]
+      general_rating: params[:general_rating]
     )
     serialize_reviews(review)
   end
@@ -57,8 +56,7 @@ class ReviewsController < ApplicationController
       preschool_rating: params[:preschool_rating],
       school_age_rating: params[:school_age_rating],
       adult_rating: params[:adult_rating],
-      general_rating: params[:general_rating],
-      educational_value: params[:educational_value]
+      general_rating: params[:general_rating]
     )
     serialize_reviews(review)
   end
