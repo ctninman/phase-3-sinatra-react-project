@@ -28,4 +28,14 @@ class Location < ActiveRecord::Base
     self.reviews.average(:general_rating).to_f
   end
 
+  # def self.top_rated_baby
+  #   locations = []
+  #   Location.all.each do |loc|
+  #     abr = loc.average_baby_rating
+  #     loc << abr
+  #     locations << loc
+  #   end
+  #   binding.pry
+  # end
+
 end

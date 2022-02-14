@@ -4,6 +4,12 @@ class FavoritesController < ApplicationController
     objects.to_json(include: [:location, user: {include: [:city, :locations, :kids, reviews: {include: :location}, favorites: {include: :location}]}])
   end
 
+  get '/users/:id/favorites' do
+    user = User.find(params[:id])
+    user_favorites = user.favorites
+    serialize_favorites(user_favorites)
+  end
+
   post '/favorites' do
     favorite = Favorite.create(
       location_id: params[:location_id],

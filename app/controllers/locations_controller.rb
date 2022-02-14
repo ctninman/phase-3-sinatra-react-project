@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
 
   def serialize_locations(objects)
-    objects.to_json(include: [:reviews, :users, :city,], methods: [:average_adult_rating, :average_baby_rating, :average_toddler_rating, :average_preschool_rating, :average_school_age_rating, :average_general_rating])
+    objects.to_json(include: [:users, :city, reviews: {include: :user}], methods: [:average_adult_rating, :average_baby_rating, :average_toddler_rating, :average_preschool_rating, :average_school_age_rating, :average_general_rating])
   end
 
   get '/locations' do
