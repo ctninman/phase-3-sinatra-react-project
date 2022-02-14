@@ -1,118 +1,98 @@
-# Phase 3 Project Guidelines
+# Take The Kids Out
 
-## Learning Goals
+### Sinatra/ActiveRecord - backend 
 
-- Build a web basic API with Sinatra and Active Record to support a React
-  frontend
+### React - frontend
 
-## Introduction
+<a href='https://github.com/ctninman/Take-The-Kids-Out-Phase3-Project'>Front-end Repo</a>
 
-Congrats on getting through all the material for Phase 3! Now's the time to put
-it all together and build something from scratch to reinforce what you know and
-expand your horizons.
+## Overview
 
-The focus of this project is **building a Sinatra API backend** that uses
-**Active Record** to access and persist data in a database, which will be used
-by a separate **React frontend** that interacts with the database via the API.
+Users can explore various cities to search for activities they and their children are likely to enjoy. Searches may be based upon age-level, or whether a location is outdoor or free. Users can add locations to their city, and add reviews to each of those locations. All data persists and is accessible to users upon refresh. 
 
-## Requirements
+## Database Tables
 
-For this project, you must:
+The database consists of 6 related tables:
+- cities
+- users
+- locations
+- reviews
+- favorites
+- kids
 
-- Use Active Record to interact with a database.
-- Have a minimum of two models with a one-to-many relationship.
-- Create API routes in Sinatra that handles at least three different CRUD
-  actions for at least one of your Active Record models.
-- Build a separate React frontend application that interacts with the API to
-  perform CRUD actions.
-- Use good OO design patterns. You should have separate classes for each of your
-  models, and create instance and class methods as necessary.
+### City
+- Has many users
 
-For example, build a todo list application with a React frontend interface and a
-Sinatra backend API, where a user can:
+- Has many locations
 
-- **Create** a new todo
-- **Read** a list of all todos
-- **Update** an individual todo
-- **Delete** a todo
+### User
+- Belongs to city
 
-A `Todo` can be tagged with a `Category`, so that each todo _belongs to_ a
-category and each category _has many_ todos.
+- Has many favorites
 
-## Getting Started
+- Has many reviews
 
-### Backend Setup
+- Has many locations through reviews
 
-This repository has all the starter code needed to get a Sinatra backend up and
-running. [**Fork and clone**][fork link] this repository to get started. Then, run
-`bundle install` to install the gems.
+- Has many kids
 
-[fork link]: https://github.com/learn-co-curriculum/phase-3-sinatra-react-project/fork
+### Location
+- Belongs to city
 
-The `app/controllers/application_controller.rb` file has an example GET route
-handler. Replace this route with routes for your project.
+- Has many favorites
 
-You can start your server with:
+- Has many reviews
 
-```console
-$ bundle exec rake server
-```
+- Has many users through reviews
 
-This will run your server on port
-[http://localhost:9292](http://localhost:9292).
+### Review
+- Belongs to user
 
-### Frontend Setup
+- Belongs to location
 
-Your backend and your frontend should be in **two different repositories**.
+### Favorite
+- Has many users
 
-Create a new repository in a **separate folder** with a React app for your
-frontend. `cd` out of the backend project directory, and use
-[create-react-app][] to generate the necessary code for your React frontend:
+- Has many locations
 
-```console
-$ npx create-react-app my-app-frontend
-```
+### Kid
+- Belongs to user
 
-After creating the project locally, you should also
-[create a repository on GitHub][create repo] to host your repo and help
-collaborate, if you're working with a partner.
+## User
 
-### Fetch Example
+Login is not required to explore locations within a city, but various features are unlocked when a user is logged in. Login allows client to add an activity to a city, write a review for a location, and save and access locations as favorites, places to visit, or places they have visited. 
 
-Your React app should make fetch requests to your Sinatra backend! Here's an
-example:
+## Cities
 
-```js
-fetch("http://localhost:9292/test")
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-```
+Users may explore activities in any city in the database and filter the activities in a variety of methods, which include
 
-## Project Tips
+### Free
 
-- This project is intended to focus more on the backend than the frontend, so
-  try and keep the React side of things relatively simple. Focus on working with
-  Active Record and performing CRUD actions. What are some interesting queries you can write? What kinds of questions can you ask of your data?
-- Once you have a project idea, come up with a domain model and decide what
-  relationships exist between the models in your application. Use a tool like
-  [dbdiagram.io][] to help visualize your models.
-- Decide on your API endpoints. What data should they return? What kind of CRUD
-  action should they perform? What data do they need from the client?
-- Use [Postman][postman download] to test your endpoints.
-- Use `binding.pry` to debug your requests on the server. It's very helpful to use a
-  `binding.pry` in your controller within a route to see what `params` are being
-  sent.
-- Use the [Network Tab in the Dev Tools][network tab] in the frontend to debug
-  your requests.
+- A list of all free activities
 
-## Resources
+### Outdoor
 
-- [create-react-app][]
-- [dbdiagram.io][]
-- [Postman][postman download]
+- A list of all location that have outdoor activities
 
-[create-react-app]: https://create-react-app.dev/docs/getting-started
-[create repo]: https://docs.github.com/en/get-started/quickstart/create-a-repo
-[dbdiagram.io]: https://dbdiagram.io/
-[postman download]: https://www.postman.com/downloads/
-[network tab]: https://developer.chrome.com/docs/devtools/network/
+### Highest-Rated for Babies
+
+- An ordered list of locations by the average score for children 0-12 months old
+
+### Highest-Rated for Toddlers
+
+- An ordered list of locations by the average score for children 1-3 years old
+
+### Highest-Rated for Preschoolers
+
+- An ordered list of locations by the average score for children 3-5 years old
+
+### Highest-Rated for School-Age Kids
+
+- An ordered list of locations by the average score for children 6-12 years old
+
+### Highest-Rated for Adults
+
+- An ordered list of locations by the average score for adults
+
+
+  
