@@ -35,7 +35,8 @@ class UsersController < ApplicationController
       user_name: params[:user_name],
       city_id: params[:city_id],
       number_of_kids: params[:number_of_kids],
-      photo: params[:photo]
+      photo: params[:photo],
+      email: params[:email]
     )
     serialize_users(user)
   end
@@ -46,7 +47,8 @@ class UsersController < ApplicationController
       user_name: params[:user_name],
       city_id: params[:city_id],
       number_of_kids: params[:number_of_kids],
-      photo: params[:photo]
+      photo: params[:photo],
+      email: params[:email]
     )
     serialize_users(user)
   end
