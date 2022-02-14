@@ -1,7 +1,7 @@
 class ReviewsController < ApplicationController
 
   def serialize_reviews(objects)
-    objects.to_json(include: [:location, user: {include: [:locations, favorites: {include: :location},  reviews: {include: :location} ]}])
+    objects.to_json(include: [:location, user: {include: [:locations, :city, favorites: {include: :location},  reviews: {include: :location} ]}])
   end
 
   get '/reviews' do
