@@ -4,30 +4,10 @@ class ReviewsController < ApplicationController
     objects.to_json(include: [:location, user: {include: [:locations, :city, favorites: {include: :location},  reviews: {include: :location} ]}])
   end
 
-  get '/reviews' do
-    Review.all.to_json(include: [:user, :location])
-  end
-
-  get '/locations/:id/reviews' do
-    location = Location.find(params[:id])
-    location_reviews = location.reviews
-    serialize_reviews(location_reviews)
-  end
-
   get '/users/:id/reviews' do
     user = User.find(params[:id])
     user_reviews = user.reviews
     serialize_reviews(user_reviews)
-  end
-
-  get '/reviews/:id' do
-    serialize_reviews(Review.find(params[:id]))
-  end
-
-  delete '/reviews/:id' do
-    review = Review.find(params[:id])
-    review.destroy
-    serialize_reviews(review)
   end
 
   post '/reviews' do
@@ -45,6 +25,20 @@ class ReviewsController < ApplicationController
     serialize_reviews(review)
   end
 
+  delete '/reviews/:id' do
+    review = Review.find(params[:id])
+    review.destroy
+    serialize_reviews(review)
+  end
+
+### currently not used
+  get '/locations/:id/reviews' do
+    location = Location.find(params[:id])
+    location_reviews = location.reviews
+    serialize_reviews(location_reviews)
+  end
+
+### currently not used
   patch '/reviews/:id' do
     review = Review.find(params[:id])
     review.update(
@@ -59,6 +53,16 @@ class ReviewsController < ApplicationController
       general_rating: params[:general_rating]
     )
     serialize_reviews(review)
+  end
+
+### currently not used
+  get '/reviews' do
+    Review.all.to_json(include: [:user, :location])
+  end
+
+### currently not used
+  get '/reviews/:id' do
+    serialize_reviews(Review.find(params[:id]))
   end
 
 end

@@ -4,10 +4,6 @@ class LocationsController < ApplicationController
     objects.to_json(include: [:users, :city, reviews: {include: :user}], methods: [:average_adult_rating, :average_baby_rating, :average_toddler_rating, :average_preschool_rating, :average_school_age_rating, :average_general_rating])
   end
 
-  get '/locations' do
-    serialize_locations(Location.all)
-  end
-
   get '/locations/:id' do
     serialize_locations(Location.find(params[:id]))
   end
@@ -54,12 +50,6 @@ class LocationsController < ApplicationController
     serialize_locations(general_locations)
   end
 
-  delete '/locations/:id' do
-    location = Location.find(params[:id])
-    location.destroy
-    {message: 'Location deleted'}.to_json
-  end
-
   post '/locations' do
     location = Location.create(
       location_name: params[:location_name],
@@ -75,6 +65,18 @@ class LocationsController < ApplicationController
       activity_type: params[:activity_type]
     )
     serialize_locations(location)
+  end
+
+### currently not used
+  delete '/locations/:id' do
+    location = Location.find(params[:id])
+    location.destroy
+    {message: 'Location deleted'}.to_json
+  end
+
+### currently not used
+  get '/locations' do
+    serialize_locations(Location.all)
   end
 
 end

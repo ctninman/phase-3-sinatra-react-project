@@ -1,5 +1,6 @@
 class KidsController < ApplicationController
 
+### currently not incorporating the kids table
   def serialize_kids(objects)
     objects.to_json(include: :user)
   end
